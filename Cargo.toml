@@ -1,0 +1,24 @@
+[package]
+name = "esp_ble_scan"
+version = "0.1.0"
+authors = ["Alex Johnson <alexiionescu@gmail.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+# [patch."https://github.com/esp-rs/esp-wifi"]
+# esp-wifi = { path = "../esp-wifi/esp-wifi" }
+
+[dependencies]
+hal = { package = "esp32c3-hal", version = "0.11.0", features = [ "embassy", "embassy-time-timg0", "async"] }
+esp-backtrace = { version = "0.7.0", features = ["esp32c3", "panic-handler", "exception-handler", "print-uart"] }
+esp-println   = { version = "0.5.0", features = ["esp32c3", "log", "uart"] }
+log = { version = "0.4.18" }
+static_cell = { version = "1.0.0" }
+embedded-io = { version = "0.4.0" }
+embassy-executor = { version = "0.2.1", package = "embassy-executor", features = [ "nightly", "executor-thread", "integrated-timers","arch-riscv32"] }
+embassy-time = { version = "0.1.2", features = ["nightly"] }
+embassy-futures = { version = "0.1.0" }
+esp-wifi = { git = "https://github.com/esp-rs/esp-wifi", features = [ "esp32c3", "big-heap", "async", "esp-now", "ble"] }
+
+[features]
+coex =["esp-wifi/coex"]

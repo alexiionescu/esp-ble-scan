@@ -1,0 +1,8 @@
+{
+    "rust-analyzer.check.allTargets": false,
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.cargo.extraArgs": ["--release"],
+    "[rust]": {
+        "editor.formatOnSave": true,
+    }
+}
