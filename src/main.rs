@@ -61,11 +61,13 @@ fn main() -> ! {
     let (wifi, bluetooth) = peripherals.RADIO.split();
     let timer = SystemTimer::new(peripherals.SYSTIMER).alarm0;
 
-    let init_mode = if cfg!(feature = "coex") {
-        esp_wifi::EspWifiInitFor::WifiBle
-    } else {
-        esp_wifi::EspWifiInitFor::Ble
-    };
+    cfg_if::cfg_if! {
+        if #[cfg(feature = "coex")] {
+            let init_mode = esp_wifi::EspWifiInitFor::WifiBle;
+        } else {
+            let init_mode = esp_wifi::EspWifiInitFor::Ble;
+        }
+    }
 
     let init = esp_wifi::initialize(
         init_mode,
